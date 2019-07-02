@@ -1,6 +1,7 @@
 package mediasoft.javaee.task.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Mailing {
@@ -17,8 +18,8 @@ public class Mailing {
 
     private String recipientName;
 
-    @ManyToOne
-    private PostalOffice postalOffices;
+    @ManyToMany(mappedBy = "mailings")
+    private List<PostalOffice> postalOffices;
 
     public Mailing() {
     }
@@ -61,5 +62,13 @@ public class Mailing {
 
     public void setId(Long id) {
         Id = id;
+    }
+
+    public List<PostalOffice> getPostalOffices() {
+        return postalOffices;
+    }
+
+    public void setPostalOffices(List<PostalOffice> postalOffices) {
+        this.postalOffices = postalOffices;
     }
 }

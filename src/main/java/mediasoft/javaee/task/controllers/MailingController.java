@@ -23,4 +23,14 @@ public class MailingController {
         mailingService.save(mailing);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/mailing/{id}")
+    public List<Mailing> getMailingsById(@PathVariable(name = "id") Long id){
+        return mailingService.findAllByPostalOffices(id);
+    }
+
+    /*
+    @TODO: добавить контроллер для смены статуса почтового отправления, ну и вообще
+        разобраться с почтовым отправлением, ибо не понятно какую логику писать??????
+     */
 }

@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface MailingService {
     List<Mailing> findAll();
 
+    List<Mailing> findAllByPostalOffices(Long id);
+
     Optional<Mailing> findById(Long id);
 
     void save(Mailing mailing);

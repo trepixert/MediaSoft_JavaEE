@@ -21,7 +21,10 @@ public class PostalOffice {
         this.address = address;
     }
 
-    @OneToMany(mappedBy = "postalOffices")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "HistoryOfMailing",
+            joinColumns = @JoinColumn(name="office_id",referencedColumnName = "Index"),
+            inverseJoinColumns = @JoinColumn(name = "mailing_id",referencedColumnName = "Id"))
     private List<Mailing> mailings;
 
     public String getName() {

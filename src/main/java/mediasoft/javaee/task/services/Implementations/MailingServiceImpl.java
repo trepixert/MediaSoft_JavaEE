@@ -1,6 +1,7 @@
 package mediasoft.javaee.task.services.Implementations;
 
 import mediasoft.javaee.task.models.Mailing;
+import mediasoft.javaee.task.models.PostalOffice;
 import mediasoft.javaee.task.repo.MailingRepo;
 import mediasoft.javaee.task.services.MailingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ public class MailingServiceImpl implements MailingService {
     @Override
     public List<Mailing> findAll() {
         return mailingRepo.findAll();
+    }
+
+    @Override
+    public List<Mailing> findAllByPostalOffices(Long id) {
+        Mailing mailing = mailingRepo.findById(id).orElseThrow(IllegalArgumentException::new);
+        List<PostalOffice> postalOffices = mailing.getPostalOffices();
+        return mailingRepo.findAllByPostalOffices(postalOffices);
     }
 
     @Override
