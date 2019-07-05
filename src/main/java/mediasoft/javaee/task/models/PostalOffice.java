@@ -6,8 +6,8 @@ import java.util.List;
 @Entity
 public class PostalOffice {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Index;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long index;
 
     private String name;
 
@@ -21,11 +21,8 @@ public class PostalOffice {
         this.address = address;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "HistoryOfMailing",
-            joinColumns = @JoinColumn(name="office_id",referencedColumnName = "Index"),
-            inverseJoinColumns = @JoinColumn(name = "mailing_id",referencedColumnName = "Id"))
-    private List<Mailing> mailings;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "postalOffice")
+    private List<HistoryOfMailing> historyOfMailings;
 
     public String getName() {
         return name;
@@ -44,10 +41,22 @@ public class PostalOffice {
     }
 
     public Long getIndex() {
-        return Index;
+        return index;
     }
 
     public void setIndex(Long index) {
-        Index = index;
+        this.index = index;
+    }
+
+    public List<HistoryOfMailing> getHistoryOfMailings() {
+        return historyOfMailings;
+    }
+
+    public void setHistoryOfMailings(List<HistoryOfMailing> historyOfMailings) {
+        this.historyOfMailings = historyOfMailings;
+    }
+
+    public void addMailingWay(HistoryOfMailing historyOfMailing){
+        this.historyOfMailings.add(historyOfMailing);
     }
 }

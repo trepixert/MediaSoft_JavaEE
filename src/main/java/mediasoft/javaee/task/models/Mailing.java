@@ -6,20 +6,20 @@ import java.util.List;
 @Entity
 public class Mailing {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @Enumerated(value = EnumType.STRING)
     private TypeOfPackage type;
 
     private Long recipientIndex;
 
-    private Long recipientAddress;
+    private String recipientAddress;
 
     private String recipientName;
 
-    @ManyToMany(mappedBy = "mailings")
-    private List<PostalOffice> postalOffices;
+    @OneToMany(mappedBy = "mailing",fetch = FetchType.EAGER)
+    private List<HistoryOfMailing> historyOfMailings;
 
     public Mailing() {
     }
@@ -40,11 +40,11 @@ public class Mailing {
         this.recipientIndex = recipientIndex;
     }
 
-    public Long getRecipientAddress() {
+    public String getRecipientAddress() {
         return recipientAddress;
     }
 
-    public void setRecipientAddress(Long recipientAddress) {
+    public void setRecipientAddress(String recipientAddress) {
         this.recipientAddress = recipientAddress;
     }
 
@@ -57,18 +57,22 @@ public class Mailing {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
-    public List<PostalOffice> getPostalOffices() {
-        return postalOffices;
+    public List<HistoryOfMailing> getHistoryOfMailings() {
+        return historyOfMailings;
     }
 
-    public void setPostalOffices(List<PostalOffice> postalOffices) {
-        this.postalOffices = postalOffices;
+    public void setHistoryOfMailings(List<HistoryOfMailing> historyOfMailings) {
+        this.historyOfMailings = historyOfMailings;
+    }
+
+    public void addWay(HistoryOfMailing historyOfMailing){
+        this.historyOfMailings.add((historyOfMailing));
     }
 }
