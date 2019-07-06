@@ -30,9 +30,13 @@ public class HistoryController {
     }
 
     @PostMapping("/history/departed/{mailing_id}")
-    public ResponseEntity<Object> sendToAnotherOffice(@PathVariable(name = "mailing_id") Long mailingId, @RequestBody Long indexOfAnotherPostalOffice){
-        historyOfMailingService.prepareToDepart(mailingId,indexOfAnotherPostalOffice);
+    public ResponseEntity<Object> sendToAnotherOffice(@PathVariable(name = "mailing_id") Long mailingId, @RequestBody Data data){
+        historyOfMailingService.prepareToDepart(mailingId,data.index);
         return ResponseEntity.ok().build();
+    }
+
+    public static class Data{
+        public Long index;
     }
 
     @PostMapping("/history/arrived/{mailing_id}")

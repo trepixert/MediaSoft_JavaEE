@@ -13,12 +13,12 @@ public class PostalOfficeController {
     @Autowired
     private PostalOfficeService postalOfficeService;
 
-    @GetMapping("/offices")
+    @GetMapping("/office")
     public List<PostalOffice> getPostalOffices(){
         return postalOfficeService.findAll();
     }
 
-    @PostMapping("/offices")
+    @PostMapping("/office")
     public ResponseEntity<Object> addOffice(@RequestBody PostalOffice postalOffice){
         PostalOffice officeCandidate = postalOfficeService.findByName(postalOffice.getName()).orElse(null);
         if(officeCandidate != null){

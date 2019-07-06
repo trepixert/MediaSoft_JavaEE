@@ -1,0 +1,16 @@
+[
+  {
+    "type": "PARCEL",
+    "recipientIndex": "1",
+    "recipientAddress": "г. Ульяновск, ул. Ленина, д.1",
+    "recipientName": "Доставим быстро",
+    "historyOfMailings": []
+  },
+  {
+    "type": "POSTCARD",
+    "recipientIndex": "2",
+    "recipientAddress": "г. Москва, ул. Гончарова, д.5",
+    "recipientName": "Доставим качественно",
+    "historyOfMailings": []
+  }
+]
